@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<meta name="theme-color" content="#f6f4ef">
+<title>无限气泡纸 · 摸鱼室</title>
+<meta name="description" content="一整屏捏不完的气泡纸。上班的时候打开，捏两下就行。不用注册，不上传任何东西。">
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="../assets/bubble.css">
+</head>
+<body>
+
+<div class="stage">
+
+  <div class="top">
+    <a class="back" href="../index.html">← 回去</a>
+    <div class="title">无限气泡纸</div>
+    <div style="width:44px"></div>
+  </div>
+
+  <main class="sheet" id="sheet" aria-label="气泡纸，按住或划过来捏破"></main>
+
+  <div class="bottom">
+    <div class="hud">
+      <div class="num" id="num">0<span class="unit">个已阵亡</span></div>
+      <div class="stat" id="stat">准备好了就开始捏。</div>
+    </div>
+    <button class="icon-btn" id="sound" type="button" aria-pressed="true">声音 开</button>
+  </div>
+
+</div>
+
+<div class="tip" id="tip">按住，划过去就行</div>
+<div class="toast" id="toast"></div>
+
+<script src="../assets/audio.js"></script>
+<script src="../assets/bubble.js"></script>
+</body>
+</html>

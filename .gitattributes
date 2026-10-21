@@ -1,0 +1,12 @@
+# 统一换行符，避免 Windows 上提交的 CRLF 让部署/协作出问题
+* text=auto eol=lf
+
+# 图片等二进制文件不做换行转换
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.woff binary
+*.woff2 binary

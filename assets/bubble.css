@@ -1,0 +1,87 @@
+/* 无限气泡纸 —— 专属样式 */
+
+.sheet {
+  --cols: 8;
+  --d: 36px;
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: repeat(var(--cols), var(--d));
+  justify-content: center;
+  align-content: center;
+  gap: 5px;
+  padding: 8px 6px 12px;
+  overflow: hidden;
+  touch-action: none;
+  cursor: pointer;
+}
+
+/* 尺寸由 JS 算好（始终是正方形），避免不同屏幕下压成椭圆 */
+.b {
+  width: var(--d);
+  height: var(--d);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 34% 27%,
+    #ffffff 0%,
+    #ffffff 24%,
+    hsl(var(--h, 200) var(--s, 20%) 91%) 70%,
+    hsl(var(--h, 200) var(--s, 20%) 86%) 100%
+  );
+  box-shadow: inset 0 -1px 2px rgba(255, 255, 255, 0.95),
+    inset 0 0 0 0.5px rgba(150, 148, 140, 0.16),
+    0 1px 2px rgba(60, 55, 45, 0.05);
+  transform: scale(1);
+  will-change: transform, opacity;
+}
+
+/* 捏破：先弹一下，再瘪下去 */
+.b.pop {
+  animation: bpop 0.42s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
+  background: radial-gradient(
+    circle at 50% 50%,
+    hsl(var(--h, 196) 8% 84%) 0%,
+    hsl(var(--h, 196) 7% 75%) 100%
+  );
+  box-shadow: inset 0 1px 3px rgba(60, 55, 45, 0.14);
+}
+
+@keyframes bpop {
+  0% { transform: scale(1); }
+  22% { transform: scale(1.16); }
+  56% { transform: scale(0.92); }
+  100% { transform: scale(0.86); opacity: 0.22; }
+}
+
+/* 补货：慢慢鼓回来 */
+.b.refill { animation: brefill 0.28s ease-out; }
+
+@keyframes brefill {
+  from { transform: scale(0.7); opacity: 0.3; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* 首次提示，摸过一次就消失 */
+.tip {
+  position: fixed;
+  left: 50%;
+  bottom: 132px;
+  transform: translateX(-50%);
+  font-size: 13px;
+  color: var(--ink-3);
+  background: rgba(255, 253, 249, 0.9);
+  padding: 8px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+  z-index: 10;
+}
+
+.tip.off { opacity: 0; }
+
+@media (prefers-reduced-motion: reduce) {
+  .b.pop { animation: none; opacity: 0.22; transform: scale(0.88); }
+  .b.refill { animation: none; }
+  .toast, .tip { transition: none; }
+}
